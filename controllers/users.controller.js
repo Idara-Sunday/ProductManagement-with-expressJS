@@ -7,7 +7,24 @@ const signUp = async (req, res) => {
     } catch(error){
         res.status(500).json({message:error.message})
     }
-}
+};
 
+const loginUser = async (req,res) => {
+    try{
+    const user = req.body;
+    const userEmail = user.email;
+    const userPassword = user.password;
+    // THERE'S A BUG HERE SO TRY AND FIX IT 
+    const checkUser = await User.findOne({email:userEmail, password:userPassword});
+    if(!checkUser){
+    res.status(404).json({message:"Invalid credentials"})
+    }
 
-module.exports = {signUp}
+    res.status(200).json(checkUser)
+ 
+    } catch(error){
+        res.status(500).json({message:error.message})
+    }
+};
+
+module.exports = {signUp,loginUser}

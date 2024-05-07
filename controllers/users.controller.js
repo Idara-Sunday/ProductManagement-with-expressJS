@@ -19,8 +19,6 @@ const signUp = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // const userEmail = user.email;
-    // const userPassword = user.password;
     // THERE'S A BUG HERE SO TRY AND FIX IT
     const checkUser = await User.findOne({ email: email });
     if (!checkUser) {

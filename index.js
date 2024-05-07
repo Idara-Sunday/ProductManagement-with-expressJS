@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/products.route.js");
-const userRoute = require("./routes/users.route.js")
+const userRoute = require("./routes/users.route.js");
+
+// Initialize Express App
 const app = express();
+const port = process.env.PORT || 3000
 
 // middleware
 app.use(express.json());
@@ -21,8 +24,8 @@ mongoose
   .then(() => {
     console.log("Database connected!");
 
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
     });
   })
   .catch(() => {

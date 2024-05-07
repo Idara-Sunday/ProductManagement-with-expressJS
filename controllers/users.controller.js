@@ -11,14 +11,18 @@ const signUp = async (req, res) => {
 
 const loginUser = async (req,res) => {
     try{
-    const user = req.body;
-    const userEmail = user.email;
-    const userPassword = user.password;
+    const {email,password} = req.body;
+    // const userEmail = user.email;
+    // const userPassword = user.password;
     // THERE'S A BUG HERE SO TRY AND FIX IT 
-    const checkUser = await User.findOne({email:userEmail, password:userPassword});
+    const checkUser = await User.findOne({email:email});
     if(!checkUser){
-    res.status(404).json({message:"Invalid credentials"})
+    return res.status(400).json({message:"Invalid email"})
     }
+
+    if(checkUser.password !== password){
+    return res.status(400).json({message:"Invalid password"})
+    } 
 
     res.status(200).json(checkUser)
  

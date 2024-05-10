@@ -19,7 +19,6 @@ const signUp = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // THERE'S A BUG HERE SO TRY AND FIX IT
     const checkUser = await User.findOne({ email: email });
     if (!checkUser) {
       return res.status(400).json({ message: "Invalid email" });

@@ -41,8 +41,9 @@ const searchForUsers = async (req,res) => {
   // console.log(allUsers)
   // when filter and value are undefined
 
-  if(!filter && !value) return res.json(allUsers);
-  if(filter && value) return res.send(allUsers.filter((user) => user[filter].includes(value)))
+  // if(!filter && !value) return res.json(allUsers);
+  if(filter && value) return res.send(allUsers.filter((user) => user[filter].includes(value)));
+  return res.send(allUsers)
 };
 
 module.exports = { signUp, loginUser,searchForUsers };

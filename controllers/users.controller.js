@@ -25,7 +25,7 @@ const loginUser = async (req, res) => {
     }
 
     if (checkUser.password !== password) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid password" }); 
     }
 
     res.status(200).json(checkUser);
@@ -34,4 +34,15 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { signUp, loginUser };
+const searchForUsers = async (req,res) => {
+  console.log(req.query);
+  const {query:{filter,value},} = req;
+  const allUsers = await User.find({})
+  // console.log(allUsers)
+  // when filter and value are undefined
+
+  if(!filter && !value) return res.json(allUsers);
+  if(filter && value) return res.send(allUsers.filter((user) => user[filter].includes(value)))
+};
+
+module.exports = { signUp, loginUser,searchForUsers };

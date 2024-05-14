@@ -16,7 +16,7 @@ const loggingMiddleware = (req,res,next) =>{
   next();
 }
 // enabling the middleware function globally
-app.use(loggingMiddleware);
+// app.use(loggingMiddleware);
 
 // routes
 app.use("/api/products", productRoute);
@@ -25,6 +25,10 @@ app.use("/api/users",userRoute);
 // enabling the middleware for a single route
 app.get("/",loggingMiddleware, (req, res) => {
   res.send("Hello from node API server");
+});
+// or
+app.get("/welcome",(req,res,next)=>{next()},(req,res) => {
+  res.send("Welcome to Idara's world");
 });
 
 mongoose

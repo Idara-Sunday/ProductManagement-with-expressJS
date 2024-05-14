@@ -11,6 +11,11 @@ const port = process.env.PORT || 3000
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const loggingMiddleware = (req,res,next) =>{
+  console.log(`${req.method} - ${req.url}`);
+  next();
+}
+app.use(loggingMiddleware);
 
 // routes
 app.use("/api/products", productRoute);

@@ -15,13 +15,15 @@ const loggingMiddleware = (req,res,next) =>{
   console.log(`${req.method} - ${req.url}`);
   next();
 }
+// enabling the middleware function globally
 app.use(loggingMiddleware);
 
 // routes
 app.use("/api/products", productRoute);
 app.use("/api/users",userRoute);
 
-app.get("/", (req, res) => {
+// enabling the middleware for a single route
+app.get("/",loggingMiddleware, (req, res) => {
   res.send("Hello from node API server");
 });
 

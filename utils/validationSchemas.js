@@ -1,4 +1,4 @@
-export const createUserValidationSchema ={
+ const createUserValidationSchema ={
     email:{
     notEmpty:{
         errorMessage:"email field must not be empty"
@@ -18,4 +18,8 @@ export const createUserValidationSchema ={
             errorMessage:"Password must be at least 3 to 6 characters"
         }
     }
+}
+
+module.exports = {
+    createUserValidationSchema
 }

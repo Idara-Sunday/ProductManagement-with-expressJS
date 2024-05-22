@@ -1,8 +1,13 @@
 const User = require("../models/user.model.js");
+const {body,validationResult,matchedData,checkSchema} = require("express-validator");
+const {createUserValidationSchema} = require('../utils/validationSchemas.js');
 
 const signUp = async (req, res) => {
   try {
+    
     const {email} = req.body;
+    const result = validationResult(req.body)
+    console.log(result)
     const checkEmail = await User.findOne({ email: email });
     if (checkEmail) {
       return res
@@ -13,11 +18,11 @@ const signUp = async (req, res) => {
     res.status(201).json(regUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
+  } 
 };
 
 const loginUser = async (req, res) => {
-  try {
+  try { 
     const { email, password } = req.body;
     const checkUser = await User.findOne({ email: email });
     if (!checkUser) {
